@@ -1,19 +1,45 @@
 import json
 import random
-from flask import Flask, request, render_template, jsonify
+import flask_discord
+from flask import Flask, request, render_template, url_for, redirect
 from MongoDB.Connector import Connector
+from app_config import configurate
 
 MongoDB = Connector()
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret key'
-app.debug = True
+app = Flask(__name__,
+            static_folder='web/static',
+            template_folder='web/templates')
 
-@app.route('/url_that_returns_data')
-def hello_world():
-    return render_template("index.html")
+configurate(app)
+discord = flask_discord.DiscordOAuth2Session(app)
 
-#'Thrust', 'Slash', 'Bite', 'Scratch', 'Spit', 'Curse'
+@app.route("/login/")
+def login():
+    return discord.create_session(scope=["identify", "email"])
+
+@app.route("/callback/")
+def callback():
+    discord.callback()
+    return redirect(url_for(".user_page"))
+
+@app.route("/user/")
+def user_page():
+    try:
+        user = discord.fetch_user()
+        return render_template("user.html", user=user)
+    except flask_discord.exceptions.Unauthorized:
+        return redirect(url_for(".login"))
+        
+@app.route('/')
+def index():
+    user = None
+    try:
+        user = discord.fetch_user()
+    except flask_discord.exceptions.Unauthorized:
+        pass
+    return render_template("index.html", user=user)
+
 @app.route('/addNPC', methods=['GET', 'POST'])
 def add_npc():
     NPCS = MongoDB.get_npcs()

@@ -1,1 +1,3 @@
 flask
+Flask-Discord
+requests_oauthlib

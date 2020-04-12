@@ -21,7 +21,7 @@ $(function() {
         </div>
         <div class="form-row">
             {% for key in default_npc_json["Stats"]%}
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
                 <label class="control-label" for="Stats">{{key}}</label>
                 <input class="form-control" id="Stats" name="Stats" required="" type="number" value="{{default_npc_json['Stats'][key]}}">
             </div>
