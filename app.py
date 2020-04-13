@@ -1,7 +1,10 @@
+import os
 import json
 import random
+import glob
 import flask_discord
-from flask import Flask, request, render_template, url_for, redirect
+from pathlib import Path
+from flask import Flask, request, render_template, url_for, redirect, send_file, abort
 from MongoDB.Connector import Connector
 from app_config import configurate
 
@@ -16,14 +19,34 @@ discord = flask_discord.DiscordOAuth2Session(app)
 
 @app.route("/login/")
 def login():
+    discord.revoke()
     return discord.create_session(scope=["identify", "email"])
+
+@app.route("/logout/")
+def logout():
+    discord.revoke()
+    return redirect(url_for(".index"))
 
 @app.route("/callback/")
 def callback():
     discord.callback()
     return redirect(url_for(".user_page"))
 
-@app.route("/user/")
+
+@app.route('/npcimage', methods=['GET'])
+def npc_image():
+    images_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "NPCImages")
+    npc_name = request.args.get("name", "").lower()
+    images = []
+    for k in glob.glob(os.path.join(images_path, "*.*")):
+        if npc_name in Path(k).stem.lower():
+            images.append(k)
+    if images:
+        filename = os.path.join(images_path, random.choice(images))
+        return send_file(filename, mimetype='image/png')
+    abort(404)
+
+@app.route("/user")
 def user_page():
     try:
         user = discord.fetch_user()

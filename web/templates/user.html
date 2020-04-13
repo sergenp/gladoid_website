@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
-
+{% set title = "Account" %}
 {%block content%}
-	<div class="row">
-		<div class="col">
-			{{user.to_json()}}
-		</div>
-	</div>
+<div class="row">
+  <div class="col">
+    <div class="card mb-3" style="max-width: 560px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src={{user.avatar_url}} class="card-img" width="150px" height="225px">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-subtitle mb-2 text-muted">{{user.name}}</h5>
+            <p class="card-text">Welcome to The Hut Assistant Community Website!<br>You can now access the forms!</p>
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <a class="btn btn-info" href="#" style="width:49%">Add Npc</a>
+                <a class="btn btn-info" href="#" style="width:49%">Add Equipment</a>
+              </div>
+            </div>
+            <br>
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <a class="btn btn-info" href="#" style="width:49%">Add Attack Type</a>
+                <a class="btn btn-info" href="#" style="width:49%">Add Equipment Slot</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock %}
