@@ -93,13 +93,17 @@ def equipments():
 
 @app.route('/attacks')
 def attacks():
-    atk_name = request.args.get("attackname", "")
+    atk_name = str(request.args.get("attackname", "")).replace(" ", "")
+    debuff_name = str(request.args.get("debuffname", "")).replace(" ", "")
+    atks = MongoDB.get_attack_information()
+    damage_types = MongoDB.get_damage_types()
+    debuffs = MongoDB.get_turn_debuffs()
     user = None
     try:
         user = discord.fetch_user()
     except flask_discord.exceptions.Unauthorized:
         pass
-    return render_template("attacks.html", user=user, atk_name=atk_name)
+    return render_template("attacks.html", user=user, debuff_name=debuff_name, atk_name=atk_name, attacks=atks, damage_types=damage_types, debuffs=debuffs)
 
 @app.route('/suggestions')
 def suggestions():

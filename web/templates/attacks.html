@@ -3,5 +3,88 @@
 {% set icon_for_logo = "scissors"%}
 {%block content%}
 
-{{atk_name}}
+<section class="panel">
+  <header class="panel-heading">
+  	<h5><b>Attack Types NPCs/Players can do</b></h5>
+  	<p>Attacks give your gladiator temporary buffs that will last for one turn</p>
+  </header>
+  <table class="table table-striped table-advance table-hover table-image">
+    <tbody>
+      <tr>
+        <th><i class="pe-7s-shield"></i> Name </th>
+        <th><i class="pe-7s-scissors"></i> Damage Type</th>
+        <th><i class="pe-7s-timer"></i> Emoji </th>
+        <th><i class="pe-7s-plus"></i> Buffs </th>
+          {%for k in attacks%}
+          <tr>
+            <td style="font-size:20px">
+              <a href="#{{k['name']}}">{{ k['name'] }}</a>
+            </td>
+            <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover" >{{ k['damage_type_name'] }}</button></td>
+            <td style="font-size: 32px;">{{ k['reaction_emoji'] }}</td>
+            {% if k['buffs']%}
+             <td><button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true">Buffs</button>
+            </td>
+            {%else%}
+            <td><p>This attack has no buffs</p></td>
+            {%endif%}
+
+          </tr>
+          {%endfor%}
+      </tr>
+    </tbody>
+  </table>
+  </section>
+{% for dbf in debuffs%}
+	<div class="modal" data-backdrop="false" id="debuff{{dbf['debuff_stats']['Debuff Type']|replace(' ', '')}}" tabindex="-1" role="dialog" aria-labelledby="debuffModal{{dbf['debuff_stats']['Debuff Type']|replace(' ', '')}}" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="debuffModal{{dbf['debuff_stats']['Debuff Type']|replace(' ', '')}}">Debuff Details - {{dbf['debuff_stats']['Debuff Type']}}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        {% for stat in dbf['debuff_stats'] %}
+		        {% if "Chance" in stat %}
+		        <h5>
+		          <b>{{ stat }}</b> : %{{ dbf['debuff_stats'][stat] }} 
+		        </h5>
+		        {%else%}
+		        <h5>
+		          <b>{{ stat }}</b> : {{ dbf['debuff_stats'][stat] }} 
+		        </h5>
+		        {%endif%}
+		        <hr />
+	        {% endfor %}
+	       <h5><b>Lasts : {{dbf['lasts_turn_count']}}</b> Turns</h5>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{%endfor%}
+{%endblock%}
+
+
+{%block script%}
+	<script type="text/javascript">
+	$(window).on('load', function(){
+		{%for dt in damage_types %}
+			$('.dt'+"{{dt['damage_type_name']}}").attr("data-original-title","{{dt['damage_type_name']}}").attr("data-content","{{dt['description']}}");
+		{%endfor%}
+		{%for atk in attacks%}
+			$('#attack' + "{{atk['name']|replace(' ', '')}}").attr("data-content",
+			    " <hr/> {%for buff in atk['buffs']%} <b>{% if 'Chance' in buff %}{{ buff }} : %{{ atk['buffs'][buff] }} {%else%}{{ buff }} : +{{ atk['buffs'][buff] }} {%endif%}</b><hr/>{%endfor%}").attr("data-original-title","{{atk['name']}}");
+		{%endfor%}
+		{% if atk_name %}
+			$('#attack{{atk_name}}').popover("show");
+		{%elif debuff_name%}
+			$('#debuff{{debuff_name}}').modal("show");
+		{%endif%}  
+	});
+	</script> 
 {%endblock%}
