@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% set title = "Account" %}
+{% set icon_for_logo = "id" %}
 {%block content%}
 <div class="row">
-  <div class="col">
-    <div class="card mb-3" style="max-width: 560px;">
-      <div class="row no-gutters">
+  <div class="col-md-7">
+    <div class="card text-center">
+      <div class="row">
         <div class="col-md-4">
-          <img src={{user.avatar_url}} class="card-img" width="150px" height="225px">
+          <img src={{user.avatar_url}} class="card-img" style="width: 80%; height: 241px"> </img>
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-subtitle mb-2 text-muted">{{user.name}}</h5>
-            <p class="card-text">Welcome to The Hut Assistant Community Website!<br>You can now access the forms!</p>
+            <p class="card-text">Welcome to The Hut Assistant Community Website!<br><br>
+              You now have access to the forms</p><br>
             <div class="row no-gutters">
               <div class="col-md-12">
-                <a class="btn btn-info" href="#" style="width:49%">Add Npc</a>
+                <a class="btn btn-info" href="{{url_for('.npcs')}}" style="width:49%">Add NPC</a>
                 <a class="btn btn-info" href="#" style="width:49%">Add Equipment</a>
               </div>
             </div>
@@ -30,6 +32,17 @@
       </div>
     </div>
   </div>
-</div>
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card text-center">
+          <div class="card-body">
+            <a href="{{url_for('.match_history')}}" class="btn btn-info card-link" style="width: 75%; margin-top: 10%;">Check Match History</a><br><br><br><br><br>
+            <a class="btn btn-info" style="width: 75%; margin-bottom: 10%">Give Suggestions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

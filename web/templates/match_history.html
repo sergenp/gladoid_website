@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% set title = "Match History" %}
+{% set icon_for_logo = "magic-wand"%}
+{% set user_id = "<@" + user.id|string + ">" %} 
+{% set user_id_two = "<@!" + user.id|string + ">" %} 
+
+{%block content%} 
+
+<style type="text/css">
+  hr {
+     border-top:1px solid #6A0DAD;
+  }
+
+.modal-dialog{
+        height:calc(100% - 60px);
+}
+.modal-content{
+  height:100%;
+ }
+.modal-header{
+        height:70px;
+
+}
+.model-footer{
+        height:75px;
+}
+.modal-body {
+    height:calc(100% - 125px);
+    overflow-y: scroll;     /*give auto it will take based in content */
+}
+.modal-backdrop {
+  z-index: -1;
+}
+</style>
+
+<section class="panel">
+  <header class="panel-heading">
+    Showing Last 15 Matches for <b>{{user.name}}</b>
+  </header>
+  <table class="table table-striped table-advance table-hover">
+    <tbody>
+      <tr>
+        <th><i class="pe-7s-shield"></i>  Versus </th>
+        <th><i class="pe-7s-timer"></i>  Date </th>
+        <th><i class="pe-7s-plus"></i>  Details</th>
+        {% if matches %}
+            {%for k in matches%}
+          <tr>
+            <td>
+              {% for x in k['Players'] %}
+                {% if (x != user_id) and (x != user_id_two) %}
+                  {{ x }}
+                {% endif %}
+              {% endfor %}
+            </td>
+            <td>{{k['Date'].strftime('%D - %T')}} GMT+0</td>
+            <td><a class="btn btn-primary" data-toggle="modal" data-target="#matchCollapse{{loop.index}}" aria-expanded="false">Show Game</a>
+            </td>
+            <div class="modal" data-backdrop="false" id="matchCollapse{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="matchCollapseModal{{loop.index}}" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="matchCollapseModal{{loop.index}}">Game Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    {% for msg in k['Messages'] %}
+                    <p> 
+                      {{ msg|safe }} 
+                    </p>
+                    {% endfor %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tr>
+          {%endfor%}
+        {% else %}
+        <tr>
+          <td colspan="3">
+            <p>Couldn't find any matches for you. It seems you haven't tried the h!hunt or h!challenge command!</p>
+          </td>
+        </tr>
+        {%endif%}
+      </tr>
+    </tbody>
+  </table>
+  </section>
+  {%endblock%}

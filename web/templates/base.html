@@ -2,7 +2,7 @@
   <meta charset="utf-8" />
   <link rel="icon" type="image/png" href="/static/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>The Hut Assistant Community Website</title>
+  <title>The Hut Assistant - {{ title }}</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <meta name="viewport" content="width=device-width" />
   <!-- Bootstrap core CSS     -->
@@ -11,8 +11,7 @@
   <link href="/static/css/animate.min.css" rel="stylesheet" />
   <!--  Light Bootstrap Table core CSS    -->
   <link href="/static/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
-  <!--  CSS for Demo Purpose, don't include it in your project     -->
-  <link href="/static/css/demo.css" rel="stylesheet" />
+
   <!--     Fonts and icons     -->
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -25,20 +24,54 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a class="simple-text">
-            The Hut Assistant Community Website
+          <i class="pe-7s-{{icon_for_logo}}"></i>
+            {{ title }}
           </a>
         </div>
         <ul class="nav">
           <li>
             <a href="{{ url_for('.index') }}">
               <i class="pe-7s-graph"></i>
-              <p>Dashboard</p>
+              <p>Index</p>
             </a>
           </li>
+          {% if user %}
           <li>
             <a href="{{ url_for('.user_page') }}">
               <i class="pe-7s-news-paper"></i>
               <p>Forms</p>
+            </a>
+          </li>
+          {% endif %}
+
+          <li>
+            <a href="{{ url_for('.npcs') }}">
+              <i class="pe-7s-magic-wand"></i>
+              <p>NPCs</p>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('.attacks') }}">
+              <i class="pe-7s-scissors"></i>
+              <p>Attacks</p>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('.equipments') }}">
+              <i class="pe-7s-shield"></i>
+              <p>Equipments</p>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('.user_page') }}">
+              <i class="pe-7s-diamond"></i>
+              <p>Equipment Slots</p>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('.suggestions') }}">
+              <i class="pe-7s-ticket"></i>
+              <p>Suggestions</p>
             </a>
           </li>
         </ul>
@@ -56,28 +89,20 @@
             </button>
           </div>
           <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-left">
-              <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-dashboard"></i>
-                  <p class="hidden-lg hidden-md">{{ title }}</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="margin-top:0px">
               <li>
                 <a href="{{ url_for('.user_page') }}">
-                  <p>Account</p>
+                  <i class="fa fa-user"></i> Account
                 </a>
               </li>
               <li>
                 {% if user %}
                 <a href="{{ url_for('.logout') }}">
-                  <p>Logout</p>
+                  <i class="fa fa-arrow-left"></i> Sign Out
                 </a>
                 {% else %}
                 <a href="{{ url_for('.login') }}">
-                  <p>Login</p>
+                  <i class="fa fa-arrow-right"></i> Sign in
                 </a>
                 {% endif %}
               </li>
@@ -109,7 +134,7 @@
 <!-- <script type="text/javascript">
 	$(document).ready(function(){
 
-    	demo.initChartist();
+    	//demo.initChartist();
 
     	$.notify({
         	icon: 'pe-7s-gift',
