@@ -22,7 +22,7 @@
 </head>
 
 <body>
-  <div class="wrapper" style="min-width: 868px">
+  <div class="wrapper" style="min-width: 900px">
     <div class="sidebar" data-color="purple">
       <div class="sidebar-wrapper">
         <div class="logo">
@@ -57,6 +57,12 @@
             </a>
           </li>
           <li>
+            <a href="{{ url_for('.leader_board') }}">
+              <i class="pe-7s-ribbon"></i>
+              <p>Leaderboard</p>
+            </a>
+          </li>
+          <li>
             <a href="{{ url_for('.suggestions') }}">
               <i class="pe-7s-ticket"></i>
               <p>Suggestions</p>
@@ -69,12 +75,15 @@
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+              <div class="col">
+                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <p class="navbar-text visible-m-inline-block navbar-toggle" data-toggle="collapse"style="margin-right: 5px;
+    float: right;">Menu</p>
+              </div>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right" style="margin-top:0px">

@@ -23,9 +23,19 @@ hr {
 	overflow-y: scroll;     /*give auto it will take based in content */
 }
 .modal-backdrop {
-	z-index: -1;
+	z-index: -100;
 }
 
 .btn {
 	text-align: center !important;
+}
+
+body{
+	background-color: rgba(170, 170, 170, 0.2);
+}
+#cover {
+    background: url("../img/monkey-1.gif") no-repeat scroll center center #FFF;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }

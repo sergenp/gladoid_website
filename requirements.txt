@@ -5,3 +5,4 @@ requests_oauthlib
 markdown2
 gunicorn
 dnspython
+Flask-Caching

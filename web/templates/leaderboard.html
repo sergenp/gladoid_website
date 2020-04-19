@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% set title = "Leaderboard" %}
+{% set icon_for_logo = "ribbon"%}
+{%block content%}
+<div id="cover">
+  <h4 class="text-muted" align="center">Grabbing the leaderboard</h4>
+</div>
+<section class="panel" style="min-width: 500px">
+  <header class="panel-heading">
+  	<h5><b>Top 10 Players</b> <p class="text-muted">(Updates every 5 minutes)</p></h5>
+  </header>
+  <table class="table table-striped table-advance table-hover table-image" id="playersTable">
+    <tbody>
+      <tr>
+      	<th>#</th>
+        <th><i class="pe-7s-shield"></i> Name </th>
+        <th><i class="pe-7s-scissors"></i> Level </th>
+        <th><i class="pe-7s-scissors"></i> XP </th>
+        <th><i class="pe-7s-timer"></i> Games Played </th>
+        <th><i class="pe-7s-plus"></i> Games Won</th>
+      </tr>
+    </tbody>
+  </table>
+  </section>
+{%endblock%}
+{%block script%}
+<script>
+(setInterval(function(){
+  $('#cover').show();
+	$.ajax({
+	  type: "GET",
+	  url: "{{url_for('get_leaderboard')}}",
+	  dataType: "json",
+	  data: {},
+	  success: function(data) {
+	    var table = $("#playersTable");
+	    $.each(data, function(idx, elem) {
+	      table.append("<tr><td>"+ parseInt(idx+1) + "</td><td>" + elem._id + "</td><td>" + elem.Level + "</td><td>" + elem.XP + "</td><td>" + elem['Games Played'] + "</td><td>" + elem['Games Won'] + "</td></tr>" )
+	    })
+      $('#cover').fadeOut(1000);
+	  }
+	})
+}(), 5 * 60 * 1000))
+
+</script>
+{%endblock%}

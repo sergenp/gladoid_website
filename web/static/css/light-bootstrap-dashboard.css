@@ -158,10 +158,6 @@ body,
     position: relative;
 }
 
-body {
-    background: rgba(203, 203, 210, 0.15);
-}
-
 a {
     color: #1DC7EA;
 }
@@ -615,7 +611,6 @@ fieldset[disabled] .btn.active {
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,
 .open > .btn-primary.dropdown-toggle {
-    background-color: transparent;
     color: #1D62F0;
     border-color: #1D62F0;
 }

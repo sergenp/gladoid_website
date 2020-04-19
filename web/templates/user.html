@@ -2,7 +2,7 @@
 {% set title = "Account" %}
 {% set icon_for_logo = "id" %}
 {%block content%}
-<div class="row">
+<div class="row" style="margin-top: 5%">
   <div class="col-md-7">
     <div class="card text-center">
       <div class="row">
@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-subtitle mb-2 text-muted">{{user.name}}</h5>
+            <h5 class="card-subtitle mb-2 text-muted"><b>Level {{profile['Level']}} Gladiator</b> {{user.name}}</h5>
             <p class="card-text">Welcome to The Hut Assistant Community Website!<br><br>
               You now have access to the forms</p><br>
             <div class="row no-gutters">
@@ -23,7 +23,7 @@
             <br>
             <div class="row no-gutters">
               <div class="col-md-12">
-                <a class="btn btn-info" href="#" style="width:98%">Add Attack Type</a>
+                <a class="btn btn-info" href="#" style="width:98%">Add Attack</a>
               </div>
             </div>
           </div>
