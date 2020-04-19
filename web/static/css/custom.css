@@ -25,3 +25,7 @@ hr {
 .modal-backdrop {
 	z-index: -1;
 }
+
+.btn {
+	text-align: center !important;
+}

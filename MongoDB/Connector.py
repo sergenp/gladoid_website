@@ -13,11 +13,14 @@ class Connector():
     def __init__(self):
         self.client = pymongo.MongoClient(CONNECTION_STRING).HutAssistant
 
-    def get_all_profiles(self) -> list:
-        return list(self.client.UserProfiles.find())
-
+    def get_profile(self, user_id) -> dict:
+        try:
+            return dict(self.client.UserProfiles.find_one({"_id" : user_id}, {'_id' : False}))
+        except Exception:
+            return None
+            
     def get_all_match_messages(self, user_id):
-        return list(self.client.GladiatorGameMessages.find({"Players" : f"<@{user_id}>"}, {'_id' : False}).sort('Date', pymongo.DESCENDING).limit(15))
+        return list(self.client.GladiatorGameMessages.find({"Players" : f"<@{user_id}>"}, {'_id' : False}).sort('Date', pymongo.DESCENDING).limit(10))
 
     def get_attack_information(self) -> list:
         return list(self.client.AttackInformation.find({}, {'_id': False}))

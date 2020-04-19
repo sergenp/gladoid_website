@@ -3,7 +3,7 @@
 {% set icon_for_logo = "scissors"%}
 {%block content%}
 
-<section class="panel">
+<section class="panel" style="min-width: 500px">
   <header class="panel-heading">
   	<h5><b>Attack Types NPCs/Players can do</b></h5>
   	<p>Attacks give your gladiator temporary buffs that will last for one turn</p>
@@ -18,9 +18,9 @@
           {%for k in attacks%}
           <tr>
             <td style="font-size:20px">
-              <a href="#{{k['name']}}">{{ k['name'] }}</a>
+              <a>{{ k['name'] }}</a>
             </td>
-            <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover" >{{ k['damage_type_name'] }}</button></td>
+            <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover">{{ k['damage_type_name'] }}</button></td>
             <td style="font-size: 32px;">{{ k['reaction_emoji'] }}</td>
             {% if k['buffs']%}
              <td><button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true">Buffs</button>
@@ -81,7 +81,13 @@
 			    " <hr/> {%for buff in atk['buffs']%} <b>{% if 'Chance' in buff %}{{ buff }} : %{{ atk['buffs'][buff] }} {%else%}{{ buff }} : +{{ atk['buffs'][buff] }} {%endif%}</b><hr/>{%endfor%}").attr("data-original-title","{{atk['name']}}");
 		{%endfor%}
 		{% if atk_name %}
-			$('#attack{{atk_name}}').popover("show");
+			$('#attack{{atk_name}}')[0].scrollIntoView({
+			  behavior: "smooth",
+			  block: "start",
+			  inline: "nearest"
+			});
+			setTimeout(function(){ $('#attack{{atk_name}}').popover("show") }, 500);
+			
 		{%elif debuff_name%}
 			$('#debuff{{debuff_name}}').modal("show");
 		{%endif%}  

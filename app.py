@@ -3,7 +3,7 @@ import random
 import glob
 import flask_discord
 from pathlib import Path
-from flask import Flask, request, render_template, url_for, redirect, send_file
+from flask import Flask, request, render_template, url_for, redirect, send_file, abort
 from MongoDB.Connector import Connector
 import markdown2
 
@@ -54,16 +54,16 @@ def npc_image():
         filename = os.path.join(images_path, random.choice(images))
         return send_file(filename, mimetype='image/png')
 
-
 @app.route("/user/")
 def user_page():
     try:
         user = discord.fetch_user()
-        return render_template("user.html", user=user)
+        profile = MongoDB.get_profile(user.id)
+        return render_template("user.html", user=user, profile=profile)
     except flask_discord.exceptions.Unauthorized:
         return redirect(url_for(".login"))
         
-@app.route('/')
+@app.route('/',methods=['GET'])
 def index():
     user = None
     try:
@@ -72,17 +72,18 @@ def index():
         pass
     return render_template("index.html", user=user)
 
-@app.route('/npcs')
+@app.route('/npcs',methods=['GET'])
 def npcs():
     all_npcs = MongoDB.get_npcs()
+    spawn_settings = MongoDB.get_npcs_spawn_settings()
     user = None
     try:
         user = discord.fetch_user()
     except flask_discord.exceptions.Unauthorized:
         pass
-    return render_template("npcs.html", user=user, npcs=all_npcs)
+    return render_template("npcs.html", user=user, npcs=all_npcs, spawns=spawn_settings)
 
-@app.route('/equipments')
+@app.route('/equipments',methods=['GET'])
 def equipments():
     user = None
     try:
@@ -91,7 +92,7 @@ def equipments():
         pass
     return render_template("equipments.html", user=user)
 
-@app.route('/attacks')
+@app.route('/attacks',methods=['GET'])
 def attacks():
     atk_name = str(request.args.get("attackname", "")).replace(" ", "")
     debuff_name = str(request.args.get("debuffname", "")).replace(" ", "")
@@ -105,7 +106,7 @@ def attacks():
         pass
     return render_template("attacks.html", user=user, debuff_name=debuff_name, atk_name=atk_name, attacks=atks, damage_types=damage_types, debuffs=debuffs)
 
-@app.route('/suggestions')
+@app.route('/suggestions',methods=['GET'])
 def suggestions():
     user = None
     try:
@@ -115,7 +116,7 @@ def suggestions():
     
     return render_template("suggestions.html", user=user)
 
-@app.route('/matchhistory')
+@app.route('/matchhistory',methods=['GET'])
 def match_history():
     try:
         user = discord.fetch_user()

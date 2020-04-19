@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% set title = "NPCs" %}
 {% set icon_for_logo = "magic-wand"%}
+
 {%block content%} 
 
-<section class="panel">
-  <header class="panel-heading">
-    NPCs that are currently can be spawned</b>
-  </header>
+<div class="panel">
+  <h5 class="panel-heading">
+    NPCs that are currently can be spawned via h!hunt command</b>
+  </h5>
+  <div class="panel-body">
   <table class="table table-striped table-advance table-hover table-image">
     <tbody>
       <tr>
@@ -17,24 +19,35 @@
         <th><i class="pe-7s-scissors"></i> Debuffs</th>
         <th><i class="pe-7s-plus"></i> Image</th>
         <th><i class="pe-7s-plus"></i> Stats</th>
-          {%for k in npcs%}
+        {%for k in npcs%}
           <tr>
             <td>
-              {{ k['Name'] }}
+              <b>{{ k['Name'] }}</b>
             </td>
-            <td>{{k['Min Level']}} - {{k['Max Level']}}</td>
-            <td>Spawn Type</td>
+            <td><b>{{k['Min Level']}} - {{k['Max Level']}}</b></td>
+            <td>
+            {%for spw in spawns%}
+              {%if k['Name'] in spw['NPCs']%}
+              <p>
+                <a class="btn btn-danger {{spw['Spawn Type']}}" data-toggle="popover" data-html="true" data-trigger="focus hover" style="width: 90%;">{{spw['Spawn Type']}}</a>
+              </p>
+              {%endif%}
+            {%endfor%}
+            </td>
             <td>
             {% for atk in k['Attacks'] %}
-              <br>
-              <a href="{{ url_for('.attacks', attackname=atk) }}">{{ atk }}</a>
-              <br><br>
+              <p>
+              <a class="btn btn-secondary" style="width: 90%;" href="{{ url_for('.attacks', attackname=atk) }}">{{ atk }}</a>
+              </p>
             {%endfor %}
             </td>
             <td>
+              <p>
             {% for dbf in k['Debuffs'] %}
-              <a href="{{ url_for('.attacks', debuffname=dbf) }}">{{ dbf }}</a>
+              <a class="btn btn-primary" style="width: 90%;" href="{{ url_for('.attacks', debuffname=dbf) }}">{{ dbf }}</a>
             {% endfor %}
+            </p>
+
             </td>
             <td>
               <img src="{{ url_for('.npc_image',name=k['Name']) }}" height="200px" width="200px" />
@@ -71,9 +84,24 @@
               </div>
             </div>
           </tr>
-          {%endfor%}
+        {%endfor%}
       </tr>
     </tbody>
   </table>
-  </section>
-  {%endblock%}
+  </div>
+</section>
+
+{%endblock%}
+
+{%block script%}
+<script type="text/javascript">
+  $(window).on('load', function(){
+    {%for spw in spawns%}
+        var spw_name = "{{spw['Spawn Type']}}";
+        var cls = "." + spw_name;
+        var spw_chance = "{{spw['Spawn Chance']}}";
+        $(cls).attr("data-content", spw_name + " Spawns has " + spw_chance + "% of spawning.<br>They give the player following bonus rewards on top of the standart rewards if they are defeated by the player:<br>{%for bns in spw['Spawn Bonuses']%} <b>{{bns}}</b> : +{{spw['Spawn Bonuses'][bns]}}<br>{%endfor%}").attr("data-original-title",   spw_name);
+    {%endfor%}
+  });
+</script>
+{%endblock%}
