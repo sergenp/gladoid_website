@@ -33,6 +33,15 @@ app.config.from_mapping(config)
 discord = flask_discord.DiscordOAuth2Session(app)
 cache = Cache(app)
 
+def get_user_and_profile():
+    user, profile = None, None
+    try:
+        user = discord.fetch_user()
+        profile = MongoDB.get_profile(user.id)
+    except flask_discord.exceptions.Unauthorized:
+        pass
+    return user, profile
+
 @app.route("/login/")
 def login():
     discord.revoke()
@@ -68,59 +77,42 @@ def get_leaderboard():
     #switch user_id with user_name
     for prof in leaderboard_profiles:
         prof["_id"] = DiscordAPI.get_user_name_from_id(prof["_id"])
-
     return jsonify(leaderboard_profiles)
 
 @app.route("/leaderboard/")
 def leader_board():
-    user = None
-    try:
-        user = discord.fetch_user()
-        profile = MongoDB.get_profile(user.id)
-        return render_template("leaderboard.html", user=user)
-    except flask_discord.exceptions.Unauthorized:
-        return render_template("leaderboard.html")
+    user, profile = get_user_and_profile()
+    if user:
+        return render_template("leaderboard.html", user=user, profile=profile)
+    return render_template("leaderboard.html")
 
 @app.route("/user/")
 def user_page():
-    try:
-        user = discord.fetch_user()
-        profile = MongoDB.get_profile(user.id)
+    user, profile = get_user_and_profile()
+    if user:
         return render_template("user.html", user=user, profile=profile)
-    except flask_discord.exceptions.Unauthorized:
-        return redirect(url_for(".login"))
+    return redirect(url_for(".login"))
         
 @app.route('/',methods=['GET'])
 def index():
-    user = None
-    try:
-        user = discord.fetch_user()
-    except flask_discord.exceptions.Unauthorized:
-        pass
-    return render_template("index.html", user=user)
+    user, profile = get_user_and_profile()
+    return render_template("index.html", user=user, profile=profile)
 
 @app.route('/npcs',methods=['GET'])
 @cache.cached(timeout=600)
 def npcs():
     all_npcs = MongoDB.get_npcs()
     spawn_settings = MongoDB.get_npcs_spawn_settings()
-    user = None
-    try:
-        user = discord.fetch_user()
-    except flask_discord.exceptions.Unauthorized:
-        pass
-    return render_template("npcs.html", user=user, npcs=all_npcs, spawns=spawn_settings)
+    user, profile = get_user_and_profile()
+    return render_template("npcs.html", user=user,  profile=profile, npcs=all_npcs, spawns=spawn_settings)
 
 @app.route('/equipments',methods=['GET'])
 @cache.cached(timeout=600)
 def equipments():
-    user = None
     all_equipments = MongoDB.get_equipments()
-    try:
-        user = discord.fetch_user()
-    except flask_discord.exceptions.Unauthorized:
-        pass
-    return render_template("equipments.html", user=user, equipments=all_equipments)
+    equipment_slots = MongoDB.get_equipment_slots()
+    user, profile = get_user_and_profile()
+    return render_template("equipments.html", user=user, profile=profile, equipments=all_equipments, slots=equipment_slots)
 
 @app.route('/attacks',methods=['GET'])
 def attacks():
@@ -129,29 +121,20 @@ def attacks():
     atks = MongoDB.get_attack_information()
     damage_types = MongoDB.get_damage_types()
     debuffs = MongoDB.get_turn_debuffs()
-    user = None
-    try:
-        user = discord.fetch_user()
-    except flask_discord.exceptions.Unauthorized:
-        pass
-    return render_template("attacks.html", user=user, debuff_name=debuff_name, atk_name=atk_name, attacks=atks, damage_types=damage_types, debuffs=debuffs)
+    user, profile = get_user_and_profile()
+    return render_template("attacks.html", user=user, profile=profile, debuff_name=debuff_name, atk_name=atk_name, attacks=atks, damage_types=damage_types, debuffs=debuffs)
 
 @app.route('/suggestions',methods=['GET'])
 def suggestions():
-    user = None
-    try:
-        user = discord.fetch_user()
-    except flask_discord.exceptions.Unauthorized:
-        pass
-    
-    return render_template("suggestions.html", user=user)
+    user, profile = get_user_and_profile()
+    return render_template("suggestions.html", user=user, profile=profile)
+
 
 @app.route('/matchhistory',methods=['GET'])
 @cache.cached(timeout=10)
 def match_history():
-    try:
-        user = discord.fetch_user()
-    except flask_discord.exceptions.Unauthorized:
+    user, profile = get_user_and_profile()
+    if not user:
         return redirect(url_for(".login"))
 
     matches = MongoDB.get_all_match_messages(user.id)
@@ -162,7 +145,7 @@ def match_history():
             # convert markdown to html
             k['Messages'][i] = markdown2.markdown(k['Messages'][i])
 
-    return render_template("match_history.html", matches=matches, user=user)
+    return render_template("match_history.html", matches=matches, user=user, profile=profile)
 
 
 

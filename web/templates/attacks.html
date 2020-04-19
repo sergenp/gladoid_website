@@ -23,7 +23,8 @@
             <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover">{{ k['damage_type_name'] }}</button></td>
             <td style="font-size: 32px;">{{ k['reaction_emoji'] }}</td>
             {% if k['buffs']%}
-             <td><button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true">Buffs</button>
+             <td>
+             	<button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true">Buffs</button>
             </td>
             {%else%}
             <td><p>This attack has no buffs</p></td>

@@ -13,8 +13,8 @@
   <link href="/static/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
 
   <!--     Fonts and icons     -->
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
   <link href="/static/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
   <!-- Custom css -->
@@ -23,7 +23,7 @@
 
 <body>
   <div class="wrapper" style="min-width: 900px">
-    <div class="sidebar" data-color="purple">
+    <div class="sidebar" data-color="blue">
       <div class="sidebar-wrapper">
         <div class="logo">
           <a class="simple-text">
@@ -68,6 +68,12 @@
               <p>Suggestions</p>
             </a>
           </li>
+          <li>
+            <a href="https://discordapp.com/api/oauth2/authorize?client_id=598077927577616384&permissions=117824&scope=bot">
+              <i class="pe-7s-mail"></i>
+              <p>Invite</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -81,11 +87,19 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <p class="navbar-text visible-m-inline-block navbar-toggle" data-toggle="collapse"style="margin-right: 5px;
-    float: right;">Menu</p>
+                <p class="navbar-text visible-m-inline-block navbar-toggle" data-toggle="collapse"style="margin-right:5px;float:right;">Menu</p>
               </div>
           </div>
           <div class="collapse navbar-collapse">
+            {% if profile %}
+            <ul class="nav navbar-nav">
+              </li>
+                <a class="navbar-brand" href="{{url_for('.equipments')}}" style="margin-left:-25px; font-size: 14px;">
+                   You have <b>{{profile['HutCoins']}}</b> HutCoins <i class="fa fa-money"></i>
+                </a>
+              </li>
+            </ul>
+            {% endif %}
             <ul class="nav navbar-nav navbar-right" style="margin-top:0px">
               <li>
                 <a href="{{ url_for('.user_page') }}">
@@ -112,8 +126,10 @@
           {% block content %}
           {% endblock %}
         </div>
-      <footer class="footer">
-      </footer>
+        <footer class="footer">
+          {% block footer %}
+          {% endblock %}
+        </footer>
     </div>
   </div>
   <!--   Core JS Files   -->

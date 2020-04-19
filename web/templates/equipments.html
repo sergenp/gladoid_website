@@ -2,26 +2,80 @@
 {% set title = "Equipments" %}
 {% set icon_for_logo = "shield"%}
 {%block content%}
-<p>Building in progress.</p>
-<!-- <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
-</p>
-<div class="row">
-  <div class="col">
-    <div class="collapse multi-collapse" id="multiCollapseExample1">
-      <div class="card card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+<div class="panel">
+  <div class="panel-heading">
+    <p>
+    {%for slot in slots%}
+      <a class="btn btn-primary" data-toggle="collapse" data-parent="#accordiongroup" href="#{{slot['Slot Name']}}" role="button" aria-expanded="false" aria-controls="{{slot['Slot Name']}}" style="margin-left: 1%; margin-top: 1%;">{{ slot['Slot Name'] }}</a>
+    {%endfor%}
+   </p>
+  </div>
+  <div class="panel-body">
+    <div class="accordion" id="accordiongroup">
+    {%for slot in slots%}
+      <div class="collapse" id="{{slot['Slot Name']}}" data-parent="#accordiongroup">
+        <table class="table table-striped table-advance table-hover table-image">
+          <tbody>
+            <tr>
+              <th>#</th>
+              <th><i class="pe-7s-shield"></i> {{slot['Slot Name']}} Name</th>
+              <th><i class="pe-7s-scissors"></i> Price</th>
+              <th><i class="pe-7s-scissors"></i> Unlocks Attack</th>
+              <th><i class="pe-7s-timer"></i> Has Debuff</th>
+              <th><i class="pe-7s-plus"></i> Buffs</th>
+            </tr>
+            {%for equipment in equipments%}
+              {% if equipment['type'] == slot['Slot Name']%}
+              <tr>
+                <td>{{loop.index+1}}</td>
+                <td>{{equipment['name']}}</td>
+                <td class="text-muted"><b>{{equipment['price']}}</b> HutCoins <i class="fa fa-money"></i></td>
+                {% if equipment['unlock_attack_name']%}
+                  <td>
+                    <p>
+                      <a class="btn btn-secondary" href="{{ url_for('.attacks', attackname=equipment['unlock_attack_name']) }}">Unlocks {{equipment['unlock_attack_name']}}
+                      </a>
+                    </p>
+                  </td>
+                {% else %}
+                  <td></td>
+                {% endif %}
+                {% if equipment['debuff_name']%}
+                  <td>
+                    <p>
+                      <a class="btn btn-secondary" href="{{ url_for('.attacks', debuffname=equipment['debuff_name']) }}">Unlocks {{equipment['debuff_name']}}
+                      </a>
+                    </p>
+                  </td>
+                {% else %}
+                  <td></td>
+                {% endif %}
+                 <td>
+                  {%if equipment['buffs']%}
+                  <button class="btn btn-primary" id="{{equipment['name']|replace(' ', '')|replace('\'', '')}}buff" data-toggle="popover" data-trigger="focus hover" data-html="true" data-placement="left">Buffs</button>
+                  {%else%}
+                  <p>{{equipment['name']}} has no buffs</p>
+                  {%endif%}
+                </td>
+              </tr>
+              {%endif%}
+            {%endfor%}
+          </tbody>
+        </table>
       </div>
+    {%endfor%}
     </div>
   </div>
-  <div class="col">
-    <div class="collapse multi-collapse" id="multiCollapseExample2">
-      <div class="card card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-      </div>
-    </div>
-  </div>
-</div> -->
+</div>
+{%endblock%}
+
+{%block script%}
+<script>
+  $(document).ready(function(){
+    $("#accordiongroup div:first-child").collapse("show");
+    {%for eq in equipments%}
+      $("#{{eq['name']|replace('\'', '')|replace(' ', '')}}buff").attr("data-content","<hr/> {%for buff in eq['buffs']%} <b>{% if 'Chance' in buff %}{{ buff }} : %{{ eq['buffs'][buff] }} {%else%}{{ buff }} : +{{ eq['buffs'][buff] }} {%endif%}</b><hr/>{%endfor%}").attr("data-original-title","{{eq['name']}}");
+    {%endfor%}
+  });
+</script>
 {%endblock%}
