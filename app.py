@@ -133,6 +133,11 @@ def match_history():
 
     return render_template("match_history.html", matches=matches, user=user)
 
+
+
+if __name__ == '__main__':
+    app.run()
+    
 # @app.route('/addNPC', methods=['GET', 'POST'])
 # def add_npc():
 #     NPCS = MongoDB.get_npcs()

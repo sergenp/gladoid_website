@@ -1,4 +1,7 @@
 flask
+pymongo
 Flask-Discord
 requests_oauthlib
 markdown2
+gunicorn
+dnspython
