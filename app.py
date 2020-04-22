@@ -70,6 +70,11 @@ def npc_image():
         filename = os.path.join(images_path, random.choice(images))
         return send_file(filename, mimetype='image/png')
 
+
+@app.route("/policy", methods=['GET'])
+def policy():
+    return render_template("policy.html")
+
 @app.route('/get_leaderboard', methods=['GET'])
 @cache.cached(timeout=300)
 def get_leaderboard():

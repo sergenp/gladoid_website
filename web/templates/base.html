@@ -5,6 +5,15 @@
   <title>The Hut Assistant - {{ title }}</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <meta name="viewport" content="width=device-width" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83851540-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-83851540-2');
+  </script>
   <!-- Bootstrap core CSS     -->
   <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Animation library for notifications   -->
@@ -22,7 +31,7 @@
 </head>
 
 <body>
-  <div class="wrapper" style="min-width: 900px">
+  <div class="wrapper" style="min-width: 800px;">
     <div class="sidebar" data-color="blue">
       <div class="sidebar-wrapper">
         <div class="logo">
