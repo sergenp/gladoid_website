@@ -100,8 +100,10 @@ def user_page():
         
 @app.route('/',methods=['GET'])
 def index():
+    profile_count = MongoDB.get_profile_count()
+    match_count = MongoDB.get_all_matches_count()
     user, profile = get_user_and_profile()
-    return render_template("index.html", user=user, profile=profile)
+    return render_template("index.html", user=user, profile=profile, pc=profile_count, mc=match_count)
 
 @app.route('/npcs',methods=['GET'])
 @cache.cached(timeout=600)
@@ -129,14 +131,25 @@ def attacks():
     user, profile = get_user_and_profile()
     return render_template("attacks.html", user=user, profile=profile, debuff_name=debuff_name, atk_name=atk_name, attacks=atks, damage_types=damage_types, debuffs=debuffs)
 
-@app.route('/suggestions',methods=['GET'])
+@app.route('/suggestions',methods=['GET', 'POST'])
 def suggestions():
+    suggestion_tags = ["Feature", "Improvement", "Idea", "Bug Fix"]
     user, profile = get_user_and_profile()
-    return render_template("suggestions.html", user=user, profile=profile)
+    if request.method == 'POST':
+        form_success = False
+        if user:
+            data = {"From" : user.name}
+            data['Tags'] = request.form.getlist('Tags')
+            data['Title'] = request.form.get('Title')
+            data['Suggestion Text'] = request.form.get('Suggestion Text')
+            MongoDB.insert_suggestion(data)
+            form_success = True
 
+        return render_template("suggestions.html", user=user, profile=profile, suggestion_tags=suggestion_tags, form_success=form_success)
+
+    return render_template("suggestions.html", user=user, profile=profile, suggestion_tags=suggestion_tags)
 
 @app.route('/matchhistory',methods=['GET'])
-@cache.cached(timeout=10)
 def match_history():
     user, profile = get_user_and_profile()
     if not user:
@@ -151,8 +164,6 @@ def match_history():
             k['Messages'][i] = markdown2.markdown(k['Messages'][i])
 
     return render_template("match_history.html", matches=matches, user=user, profile=profile)
-
-
 
 if __name__ == '__main__':
     app.run()

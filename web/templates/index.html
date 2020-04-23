@@ -3,22 +3,29 @@
 {% set icon_for_logo = "graph"%}
 {%block content%}
 <div class="panel panel-info">
-	<h5 class="panel-heading" style="margin-top: 0px;">Welcome to The Hut Assistant Community Website!</h5>
-	<div class="panel-body">
-		<p>Welcome you alpha testers!</p>
-		<p>Enjoy the little functionality the website is offering as of now, I will be needing your suggestions to improve the website. For now, the future plan includes:</p>
-		<ul>
-			<li>Make a suggestion page</li>
-			<li>Right now I am building the Equipments page, which will enable you to buy items for your gladiator profile</li>
-			<li style="text-decoration: line-through;">Show how much HutCoins you have in the top left corner of the website so you can shop with it</li>
-			<li style="text-decoration: line-through;">Add a leaderboard</li>
-		</ul>
-	</div>
+  <h5 class="panel-heading" style="margin-top: 0px;">Welcome to The Hut Assistant Community Website!</h5>
+  <div class="panel-body">
+    <p>Welcome you alpha testers!</p>
+    <p>Enjoy the little functionality the website is offering as of now, I will be needing your suggestions to improve the website. For now, the future plan includes:</p>
+    <ul>
+      <li>Make so logged in users can add:
+        <ul>
+          <li>Equipments</li>
+          <li>NPCs</li>
+          <li>Attacks</li>
+        </ul>
+      </li>
+      <li style="text-decoration: line-through;">Make a suggestion page</li>
+      <li>Right now I am building the Equipments page, which will enable you to buy items for your gladiator profile</li>
+      <li style="text-decoration: line-through;">Show how much HutCoins you have in the top left corner of the website so you can shop with it</li>
+      <li style="text-decoration: line-through;">Add a leaderboard</li>
+    </ul>
+  </div>
 </div>
 {%endblock%}
 
 {% block footer %}
-	<div id="cookieconsent"></div>
+  <div id="cookieconsent" style="margin:5%"></div>
 {% endblock %}
 
 {%block script%}
@@ -31,6 +38,14 @@ $('#cookieconsent').ihavecookies({
   link:"/policy",
   delay: 200,
 });
-
+$.notify({
+    icon: 'pe-7s-info',
+    message: "So far {{pc}} profiles have been created.<br>{{mc}} games has been completed."
+  },
+  {
+    type: 'info',
+    autoHide: true,
+    autoHideDelay: 1000
+});
 </script>
 {%endblock%}

@@ -16,6 +16,12 @@ class Connector():
         except Exception:
             return None
 
+    def get_profile_count(self) -> int:
+        return self.client.UserProfiles.find().count()
+
+    def get_all_matches_count(self) -> int:
+        return self.client.GladiatorGameMessages.find().count()
+        
     def get_all_match_messages(self, user_id):
         return list(self.client.GladiatorGameMessages.find({"Players" : f"<@{user_id}>"}, {'_id' : False}).sort('Date', pymongo.DESCENDING).limit(10))
 
@@ -53,4 +59,5 @@ class Connector():
         guild_settings.pop("_id")
         return guild_settings
 
-    
+    def insert_suggestion(self, suggestion_dict):
+        self.client.BotSuggestions.insert_one(suggestion_dict)
