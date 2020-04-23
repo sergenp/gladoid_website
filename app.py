@@ -73,7 +73,8 @@ def npc_image():
 
 @app.route("/policy", methods=['GET'])
 def policy():
-    return render_template("policy.html")
+    user, profile = get_user_and_profile()
+    return render_template("policy.html", user=user, profile=profile)
 
 @app.route('/get_leaderboard', methods=['GET'])
 @cache.cached(timeout=300)
@@ -164,6 +165,11 @@ def match_history():
             k['Messages'][i] = markdown2.markdown(k['Messages'][i])
 
     return render_template("match_history.html", matches=matches, user=user, profile=profile)
+
+@app.route('/commands', methods=['GET'])
+def commands():
+    user, profile = get_user_and_profile()
+    return render_template("commands.html", user=user, profile=profile)
 
 if __name__ == '__main__':
     app.run()

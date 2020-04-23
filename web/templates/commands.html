@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% set title = "Commands" %}
+{% set icon_for_logo = "shield"%}
+{%block content%}
+<h2 id="the-hut-assistant">The Hut Assistant</h2>
+<p>This README contains how to add the bot to your server and what does it do. Feel free to email me if you want to help me develop this bot.</p>
+<h3 id="how-do-i-add-this-bot-to-my-server-">How Do I add this bot to my server?</h3>
+<p>Simply click Invite on the menu</p>
+<h3 id="what-is-this-bot-what-does-it-do-">What is this bot? What does it do?</h3>
+<p>Hut Assistant essentially has been created for a private server called &quot;The Hut&quot;. It started as a multi-functional bot
+  that has some utility functionality, like searching videos on youtube based on given sentence or word.
+  It has evolved into a RPG kind-of bot when I started working on a dueling system between players, which basically you challenge a discord member
+  to a duel, game starts, you have certain kind of moves available to you, you react to the message the bot has send to choose
+  from one of the moves and with some calculation happening in the background the other player takes damage.</p>
+<p>I have recently added a tracking system that tracks the player&#39;s duel statistics.(How many won, how many lost, XP, Coins)
+  With that I have added NPCs to the dueling functionality. You can now, using the exact methods, duel with a computer controlled, player.</p>
+<p>In future, I am planning to add more NPCs to the game.</p>
+<h4 id="bot-commands">Bot Commands</h4>
+<table class="table table-striped table-advance table-hover table-image">
+  <thead>
+    <tr>
+      <th>Corona</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>setnewschannel</td>
+      <td>Sets the current channel as the corona news channel. Bot will send news about corona virus to this channel after using this command</td>
+    </tr>
+    <tr>
+      <td>virus</td>
+      <td>Given country, it shows the specific cases inside that country, otherwise it shows general information about the virus. Information about the virus is gotten from the <a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a></td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped table-advance table-hover table-image">
+  <thead>
+    <tr>
+      <th>General</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>quote</td>
+      <td>Gives out a random quote from a random person from history</td>
+    </tr>
+    <tr>
+      <td>avatar</td>
+      <td>Gives out an embed containing the mentioned user&#39;s avatar h!avatar @sergenp</td>
+    </tr>
+    <tr>
+      <td>invite</td>
+      <td>Gives out the invite link of the bot</td>
+    </tr>
+    <tr>
+      <td>translate</td>
+      <td>Translates given arguments to english</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped table-advance table-hover table-image">
+  <thead>
+    <tr>
+      <th>Gladiator</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>challenge</td>
+      <td>Challenges the another discord member to a gladiator match</td>
+    </tr>
+    <tr>
+      <td>gamead</td>
+      <td>Shows a buzzwordy ad for the Gladiator game</td>
+    </tr>
+    <tr>
+      <td>gamerules</td>
+      <td>Sends a DM containing how the Gladiator game is played</td>
+    </tr>
+    <tr>
+      <td>hunt</td>
+      <td>Spawns a random NPC(%90) or fails(10%). You can fight a Gladiator Game with spawned NPC</td>
+    </tr>
+    <tr>
+      <td>profile</td>
+      <td>Shows your Gladiator Game profile, LVL, XP, Items etc. Or given a tag to another discord Member, shows the same for the discord Member</td>
+    </tr>
+    <tr>
+      <td>shop</td>
+      <td>Given a page, it shows the Items you can buy for your Gladiator. If no argument is given, it shows the available pages instead</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped table-advance table-hover table-image">
+  <thead>
+    <tr>
+      <th>Meme</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>blb</td>
+      <td>Generates a be like bill image given gender value, which can be F or M for Female or Male h!blb [user] [gender=M]</td>
+    </tr>
+    <tr>
+      <td>buzzword</td>
+      <td>Gives out a random company buzzword</td>
+    </tr>
+    <tr>
+      <td>dadjoke</td>
+      <td>Gives out a random dad joke</td>
+    </tr>
+    <tr>
+      <td>meme</td>
+      <td>Gives out a random meme</td>
+    </tr>
+    <tr>
+      <td>swq</td>
+      <td>Gives out a random star wars quote</td>
+    </tr>
+    <tr>
+      <td>xkcd</td>
+      <td>Gives out a random xkcd comic</td>
+    </tr>
+    <tr>
+      <td>yesno</td>
+      <td>Gives out a random yes/no/maybe image Example: h!yesno is my life going to be alright?</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped table-advance table-hover table-image">
+  <thead>
+    <tr>
+      <th>Trivia</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ask</td>
+      <td>Asks a random trivia question to the user who have used the command</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped table-advance table-hover table-image">
+  <thead>
+    <tr>
+      <th>No Category</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>changeprefix</td>
+      <td>Changes the prefix of the bot from default &quot;h!&quot;</td>
+    </tr>
+    <tr>
+      <td>help</td>
+      <td>Shows the default help message, h!help command_name for specific information about the command_name</td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="gladiator-game">Gladiator Game</h3>
+<div class="row">
+	<div class="col-md-12 text-center">
+		<p><code>h!hunt</code></p>
+		<p>An example of NPC spawning using this command</p>
+		<p><img class="img-fluid" height="500px" width="500px" src="https://raw.githubusercontent.com/sergenp/the_hut_bot/master/Images/Hunt.png" alt=""></p>
+		<p>An example fight</p>
+		<p><img class="img-fluid" height="500px" width="500px" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt1.png?raw=true" alt=""></p>
+		<p><img class="img-fluid" height="500px" width="500px" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt2.png?raw=true" alt=""></p>
+		<p><img class="img-fluid" height="500px" width="500px" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt3.png?raw=true" alt=""></p>
+		<p><img class="img-fluid" height="500px" width="500px" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt4.png?raw=true" alt=""></p>
+	</div>
+</div>
+{%endblock%}
