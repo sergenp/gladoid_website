@@ -5,23 +5,25 @@
 <div id="cover">
   <h4 class="text-muted" align="center">Grabbing the leaderboard</h4>
 </div>
-<section class="panel" style="min-width: 500px">
-  <header class="panel-heading">
-  	<h5><b>Top 10 Players</b> <p class="text-muted">(Updates every 5 minutes)</p></h5>
-  </header>
-  <table class="table table-striped table-advance table-hover table-image" id="playersTable">
-    <tbody>
-      <tr>
-      	<th>#</th>
-        <th><i class="pe-7s-shield"></i> Name </th>
-        <th><i class="pe-7s-scissors"></i> Level </th>
-        <th><i class="pe-7s-scissors"></i> XP </th>
-        <th><i class="pe-7s-timer"></i> Games Played </th>
-        <th><i class="pe-7s-plus"></i> Games Won</th>
-      </tr>
-    </tbody>
-  </table>
-  </section>
+<div class="panel">
+  <div class="panel-heading">
+  	<h5><b>Top 10 Players</b> <p class="text-muted">(Updates every 10 minutes)</p></h5>
+  </div>
+  <div class="panel-body table-responsive">
+    <table class="table table-striped table-advance table-hover table-image" id="playersTable">
+      <tbody>
+        <tr>
+        	<th>#</th>
+          <th><i class="pe-7s-shield"></i> Name </th>
+          <th><i class="pe-7s-scissors"></i> Level </th>
+          <th><i class="pe-7s-scissors"></i> XP </th>
+          <th><i class="pe-7s-timer"></i> Games Played </th>
+          <th><i class="pe-7s-plus"></i> Games Won</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 {%endblock%}
 {%block script%}
 <script>
@@ -40,7 +42,7 @@
       $('#cover').fadeOut(1000);
 	  }
 	})
-}(), 5 * 60 * 1000))
+}(), 10 * 60 * 1000))
 
 </script>
 {%endblock%}

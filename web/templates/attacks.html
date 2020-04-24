@@ -3,39 +3,41 @@
 {% set icon_for_logo = "scissors"%}
 {%block content%}
 
-<section class="panel">
+<div class="panel">
   <header class="panel-heading">
   	<h5><b>Attack Types NPCs/Players can do</b></h5>
   	<p>Attacks give your gladiator temporary buffs that will last for one turn</p>
   </header>
-  <table class="table table-striped table-advance table-hover table-image">
-    <tbody>
-      <tr>
-        <th><i class="pe-7s-shield"></i> Name </th>
-        <th><i class="pe-7s-scissors"></i> Damage Type</th>
-        <th><i class="pe-7s-timer"></i> Emoji </th>
-        <th><i class="pe-7s-plus"></i> Buffs </th>
-          {%for k in attacks%}
-          <tr>
-            <td style="font-size:20px">
-              <a>{{ k['name'] }}</a>
-            </td>
-            <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover">{{ k['damage_type_name'] }}</button></td>
-            <td style="font-size: 32px;">{{ k['reaction_emoji'] }}</td>
-            {% if k['buffs']%}
-             <td>
-             	<button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true">Buffs</button>
-            </td>
-            {%else%}
-            <td><p>This attack has no buffs</p></td>
-            {%endif%}
+  <div class="panel-body table-responsive">
+	  <table class="table table-striped table-advance table-hover table-image text-center">
+	    <tbody>
+	      <tr>
+	        <th><i class="pe-7s-shield"></i> Name </th>
+	        <th><i class="pe-7s-scissors"></i> Damage Type</th>
+	        <th><i class="pe-7s-timer"></i> Emoji </th>
+	        <th><i class="pe-7s-plus"></i> Buffs </th>
+	          {%for k in attacks%}
+	          <tr>
+	            <td style="font-size:18px">
+	              <a>{{ k['name'] }}</a>
+	            </td>
+	            <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover">{{ k['damage_type_name'] }}</button></td>
+	            <td style="font-size: 32px;">{{ k['reaction_emoji'] }}</td>
+	            {% if k['buffs']%}
+	             <td>
+	             	<button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true" data-placement="left">Buffs</button>
+	            </td>
+	            {%else%}
+	            <td><p>This attack has no buffs</p></td>
+	            {%endif%}
 
-          </tr>
-          {%endfor%}
-      </tr>
-    </tbody>
-  </table>
-  </section>
+	          </tr>
+	          {%endfor%}
+	      </tr>
+	    </tbody>
+	  </table>
+  </div>
+</div>
 {% for dbf in debuffs%}
 	<div class="modal" data-backdrop="false" id="debuff{{dbf['debuff_stats']['Debuff Type']|replace(' ', '')}}" tabindex="-1" role="dialog" aria-labelledby="debuffModal{{dbf['debuff_stats']['Debuff Type']|replace(' ', '')}}" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-scrollable" role="document">

@@ -2,47 +2,64 @@
 {% set title = "Account" %}
 {% set icon_for_logo = "id" %}
 {%block content%}
-<div class="row" style="margin-top: 5%">
-  <div class="col-md-7">
+
+<style type="text/css">
+  .btn {
+    margin-top: 1% !important;
+    margin-bottom: 2% !important;
+    width: 100%;
+  }
+  @media only screen and (min-width: 600px)
+  .row {
+  display: flex;
+  align-items: center;
+}
+</style>
+
+<div class="row">
+  <div class="col-md-12">
     <div class="card text-center">
       <div class="row">
         <div class="col-md-4">
-          <img src={{user.avatar_url}} class="card-img" style="width: 80%; height: 241px"> </img>
+          <img src={{user.avatar_url}} class="img-thumbnail" style="width: 100%;"></img>
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-subtitle mb-2 text-muted">
-            {%if profile %}
+              {%if profile %}
               <b>Level {{profile['Level']}} Gladiator</b>
-            {%endif%} 
-            {{user.name}}</h5>
+              {%endif%}
+              @{{user.name}}</h5>
             <p class="card-text">Welcome to The Hut Assistant Community Website!<br><br>
               You now have access to the forms</p><br>
-            <div class="row no-gutters">
-              <div class="col-md-12">
-                <a class="btn btn-info" href="#" style="width:49%">Add NPC</a>
-                <a class="btn btn-info" href="#" style="width:49%">Add Equipment</a>
+            <div class="row">
+              <div class="col-md-6">
+                <a class="btn btn-danger" href="#" disabled>Add NPC</a>
+              </div>
+              <div class="col-md-6">
+                <a class="btn btn-danger" href="#" disabled>Add Equipment</a>
               </div>
             </div>
-            <br>
-            <div class="row no-gutters">
+            <div class="row">
               <div class="col-md-12">
-                <a class="btn btn-info" href="#" style="width:98%">Add Attack</a>
+                <a class="btn btn-danger" href="#" disabled>Add Attack</a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card text-center">
-          <div class="card-body">
-            <a href="{{url_for('.match_history')}}" class="btn btn-info card-link" style="width: 70%; margin: 5%;">Check Match History</a>
-            <a class="btn btn-info" style="width: 70%; margin: 5%">Give Suggestions</a>
-            <a class="btn btn-info" style="width: 70%; margin: 5%">Equipment Shop</a>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4">
+                    <a href="{{url_for('.match_history')}}" class="btn btn-primary">Check Match History</a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="{{url_for('.suggestions')}}" class="btn btn-primary">Give Suggestions</a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="{{url_for('.equipments')}}" class="btn btn-primary">Equipment Shop</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

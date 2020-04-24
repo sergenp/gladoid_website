@@ -33,7 +33,7 @@
 </head>
 
 <body>
-  <div class="wrapper" style="min-width: 800px;">
+  <div class="wrapper">
     <div class="sidebar" data-color="blue">
       <div class="sidebar-wrapper">
         <div class="logo">
@@ -108,16 +108,13 @@
               </div>
           </div>
           <div class="collapse navbar-collapse">
-            {% if profile %}
-            <ul class="nav navbar-nav">
-              </li>
-                <a class="navbar-brand" href="{{url_for('.equipments')}}" style="margin-left:-25px; font-size: 14px;">
-                   You have <b>{{profile['HutCoins']}}</b> HutCoins <i class="fa fa-money"></i>
-                </a>
-              </li>
-            </ul>
-            {% endif %}
             <ul class="nav navbar-nav navbar-right" style="margin-top:0px">
+            {% if profile %}
+              <li>
+                <a href="{{url_for('.equipments')}}"><i class="fa fa-money"></i>
+                   You have <b> {{profile['HutCoins']}} </b>HutCoins</a>
+              </li>
+            {% endif %}
               <li>
                 <a href="{{ url_for('.user_page') }}">
                   <i class="fa fa-user"></i> Account

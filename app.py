@@ -77,7 +77,7 @@ def policy():
     return render_template("policy.html", user=user, profile=profile)
 
 @app.route('/get_leaderboard', methods=['GET'])
-@cache.cached(timeout=300)
+@cache.cached(timeout=600)
 def get_leaderboard():
     leaderboard_profiles = MongoDB.get_leaderboard()
     #switch user_id with user_name
@@ -107,7 +107,6 @@ def index():
     return render_template("index.html", user=user, profile=profile, pc=profile_count, mc=match_count)
 
 @app.route('/npcs',methods=['GET'])
-@cache.cached(timeout=600)
 def npcs():
     all_npcs = MongoDB.get_npcs()
     spawn_settings = MongoDB.get_npcs_spawn_settings()
@@ -115,7 +114,6 @@ def npcs():
     return render_template("npcs.html", user=user,  profile=profile, npcs=all_npcs, spawns=spawn_settings)
 
 @app.route('/equipments',methods=['GET'])
-@cache.cached(timeout=600)
 def equipments():
     all_equipments = MongoDB.get_equipments()
     equipment_slots = MongoDB.get_equipment_slots()
