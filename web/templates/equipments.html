@@ -2,12 +2,18 @@
 {% set title = "Equipments" %}
 {% set icon_for_logo = "shield"%}
 {%block content%}
+<style type="text/css">
+{%for slot in slots%}
+#{{slot['Slot Name']}} .collapse.in,{%endfor%} {
+    display: table-row-group;
+}
+</style>
 <div class="panel">
   <div class="panel-heading">
     <div class="row">  
       {%for slot in slots%}
         <div class="col-xs-12 col-md-6 col-lg-3">
-          <a class="btn btn-primary" data-toggle="collapse" data-parent="#accordiongroup" href="#{{slot['Slot Name']}}" role="button" aria-expanded="false" aria-controls="{{slot['Slot Name']}}" style="margin-left: 1%; margin-top: 1%; width: 100%;">{{  slot['Slot Name'] }}</a>
+          <a class="btn btn-primary" data-toggle="collapse" href="#{{slot['Slot Name']}}" role="button" aria-expanded="false" aria-controls="{{slot['Slot Name']}}" style="margin-left: 1%; margin-top: 1%; width: 100%;">{{  slot['Slot Name'] }}</a>
         </div>
       {%endfor%}
     </div>

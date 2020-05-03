@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% set title = "Match History" %}
 {% set icon_for_logo = "magic-wand"%}
-{% set user_id = "<@" + user.id|string + ">" %} 
-{% set user_id_two = "<@!" + user.id|string + ">" %} 
 
 {%block content%} 
 <div class="panel">
@@ -21,9 +19,9 @@
             <tr>
               <td>
                 {% for x in k['Players'] %}
-                  {% if (x != user_id) and (x != user_id_two) %}
-                    {{ x }}
-                  {% endif %}
+                  {%if x != user.name%}
+                    {{x}}
+                  {%endif%}
                 {% endfor %}
               </td>
               <td>{{k['Date'].strftime('%D - %T')}} GMT+0</td>

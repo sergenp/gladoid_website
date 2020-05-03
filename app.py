@@ -2,6 +2,7 @@ import os
 import random
 import glob
 import flask_discord
+import re
 try:
     from app_config import configurate 
     configurate()
@@ -45,7 +46,7 @@ def get_user_and_profile():
 @app.route("/login/")
 def login():
     discord.revoke()
-    return discord.create_session(scope=["identify", "email"])
+    return discord.create_session(scope=["identify"])
 
 @app.route("/logout/")
 def logout():
@@ -155,10 +156,19 @@ def match_history():
         return redirect(url_for(".login"))
 
     matches = MongoDB.get_all_match_messages(user.id)
-    for k in matches:
+    user_names = {}
+    for k in matches:        
+        for i, z in enumerate(k['Players']):
+            user_ids = re.findall("[^<](\\d+)[$>]", z)
+            for n in user_ids:
+                user_names[n] = DiscordAPI.get_user_name_from_id(int(n))
+                k['Players'][i] = user_names[n]
+
         for i, z in enumerate(k['Messages']):
-            # replace user id with user name
-            k['Messages'][i] = z.replace(f"<@{user.id}>", user.name).replace(f"<@!{user.id}>", user.name)
+            for key in user_names.keys():
+                z = z.replace(key, user_names[key])
+
+            k['Messages'][i] = re.sub("(<@(!)?|>)", "", z)
             # convert markdown to html
             k['Messages'][i] = markdown2.markdown(k['Messages'][i])
 
