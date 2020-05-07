@@ -8,7 +8,7 @@ class Connector():
         self.client = pymongo.MongoClient(os.environ["MongoDB_CONNECTION_STRING"]).HutAssistant
 
     def get_leaderboard(self) -> list:
-        return list(self.client.UserProfiles.find().sort('XP', pymongo.DESCENDING).limit(10))
+        return list(self.client.UserProfiles.find().sort('Games Won', pymongo.DESCENDING).limit(10))
 
     def get_profile(self, user_id) -> dict:
         try:
