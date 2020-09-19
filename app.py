@@ -2,6 +2,7 @@ import os
 import random
 import glob
 import flask_discord
+import json
 import re
 try:
     from app_config import configurate 
@@ -14,6 +15,7 @@ from flask_caching import Cache
 from MongoDB.Connector import Connector
 from Discord import DiscordAPI
 import markdown2
+import uuid
 
 
 MongoDB = Connector()
@@ -179,32 +181,40 @@ def commands():
     user, profile = get_user_and_profile()
     return render_template("commands.html", user=user, profile=profile)
 
+@app.route('/addNPC', methods=['GET', 'POST'])
+def add_npc():
+    user, profile = get_user_and_profile()
+    if not user:
+        return redirect(url_for(".login"))
+    
+    NPCS = MongoDB.get_npcs()
+    attackTypes = MongoDB.get_attack_information()
+    debuffTypes = MongoDB.get_turn_debuffs()
+    damageTypes = [x['damage_type_name'] for x in attackTypes]
+    default_npc_json = random.choice(NPCS)
+    if request.method == 'POST':
+        atks = [x.split(" ")[0] for x in request.form.getlist('Attacks')]
+        debuffs = [request.form.get('Debuffs')]
+        stats = request.form.getlist('Stats')
+        stat_keys = default_npc_json['Stats'].keys()
+        for k in request.form:
+            if k in default_npc_json and not k in ('Attacks', 'Debuffs', 'Stats'):
+                try:
+                    default_npc_json[k] = int(request.form[k])
+                except ValueError:
+                    default_npc_json[k] = request.form[k]
+        default_npc_json["Stats"] = dict(zip(stat_keys, stats))
+        default_npc_json["Attacks"] = atks
+        default_npc_json["Debuffs"] = debuffs
+        default_npc_json["By User"] = user.id
+        MongoDB.insert_usermade_npc(default_npc_json)        
+        return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes, damages=damageTypes, debuffs=debuffTypes, added_succesfully=True)
+
+
+    return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes, damages=damageTypes, debuffs=debuffTypes)
+
 if __name__ == '__main__':
+    os.makedirs(os.path.join(os.getcwd(), "UserAddedNPCs"), exist_ok=True)
     app.run()
     
-# @app.route('/addNPC', methods=['GET', 'POST'])
-# def add_npc():
-#     NPCS = MongoDB.get_npcs()
-#     attackTypes = MongoDB.get_attack_information()
-#     debuffTypes = MongoDB.get_turn_debuffs()
-#     damageTypes = [x['damage_type_name'] for x in attackTypes]
 
-#     default_npc_json = random.choice(NPCS)
-#     if request.method == 'POST':
-#         with open(f"{request.form['Name']}.json", "w") as f:
-#             atks = [x.split(" ")[0] for x in request.form.getlist('Attacks')]
-#             debuffs = [request.form.get('Debuffs')]
-#             stats = request.form.getlist('Stats')
-#             stat_keys = default_npc_json['Stats'].keys()
-#             for k in request.form:
-#                 if k in default_npc_json and not k in ('Attacks', 'Debuffs', 'Stats'):
-#                     try:
-#                         default_npc_json[k] = int(request.form[k])
-#                     except ValueError:
-#                         default_npc_json[k] = request.form[k]
-
-#             default_npc_json["Stats"] = dict(zip(stat_keys, stats))
-#             default_npc_json["Attacks"] = atks
-#             default_npc_json["Debuffs"] = debuffs
-#             json.dump(default_npc_json, f, indent=4, sort_keys=True)
-#     return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes, damages=damageTypes, debuffs=debuffTypes)

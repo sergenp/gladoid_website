@@ -60,4 +60,7 @@ class Connector():
         return guild_settings
 
     def insert_suggestion(self, suggestion_dict):
-        self.client.BotSuggestions.insert_one(suggestion_dict)
+        self.client.BotSuggestions.insert_one(suggestion_dict)    
+    
+    def insert_usermade_npc(self, npc_dict):
+        self.client.UserNPCs.insert_one(npc_dict)

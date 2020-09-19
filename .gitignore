@@ -129,3 +129,5 @@ dmypy.json
 #ignore test.py
 MongoDB/mongo_settings.py
 app_config.py
+Pipfile
+Pipfile.lock

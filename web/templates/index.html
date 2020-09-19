@@ -11,7 +11,7 @@
       <li>Make so logged in users can add:
         <ul>
           <li>Equipments</li>
-          <li>NPCs</li>
+          <li style="text-decoration: line-through;">NPCs</li>
           <li>Attacks</li>
         </ul>
       </li>
@@ -45,8 +45,9 @@ $.notify({
   },
   {
     type: 'info',
-    autoHide: true,
-    autoHideDelay: -2000
+	  delay: 1500,
+	  timer: 500
+    
 });
 </script>
 {%endblock%}
