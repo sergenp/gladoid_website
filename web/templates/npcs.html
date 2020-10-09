@@ -28,7 +28,7 @@
             {%for spw in spawns%}
             {%if k['Name'] in spw['NPCs']%}
             <p>
-              <a class="btn btn-danger {{spw['Spawn Type']}}" data-toggle="popover" data-html="true" data-trigger="focus hover" style="width: 90%;">{{spw['Spawn Type']}}</a>
+              <a class="btn btn-danger btn-fill {{spw['Spawn Type']}}" data-toggle="popover" data-html="true" data-trigger="focus hover" style="width: 90%;">{{spw['Spawn Type']}}</a>
             </p>
             {%endif%}
             {%endfor%}
@@ -36,21 +36,21 @@
           <td>
             {% for atk in k['Attacks'] %}
             <p>
-              <a class="btn btn-secondary" style="width: 90%;" href="{{ url_for('.attacks', attackname=atk) }}">{{ atk }}</a>
+              <a class="btn btn-secondary btn-fill" style="width: 90%;" href="{{ url_for('.attacks', attackname=atk) }}">{{ atk }}</a>
             </p>
             {%endfor %}
           </td>
           <td>
             <p>
               {% for dbf in k['Debuffs'] %}
-              <a class="btn btn-primary" style="width: 90%;" href="{{ url_for('.attacks', debuffname=dbf) }}">{{ dbf }}</a>
+              <a class="btn btn-primary btn-fill" style="width: 90%;" href="{{ url_for('.attacks', debuffname=dbf) }}">{{ dbf }}</a>
               {% endfor %}
             </p>
           </td>
           <td>
             <img src="{{ url_for('.npc_image',name=k['Name']) }}" height="100px" width="100px" />
           </td>
-          <td><a class="btn btn-primary" data-toggle="modal" data-target="#npc{{loop.index}}" aria-expanded="false">NPC Stats</a>
+          <td><a class="btn btn-primary btn-fill" data-toggle="modal" data-target="#npc{{loop.index}}" aria-expanded="false">NPC Stats</a>
           </td>
           <div class="modal" data-backdrop="false" id="npc{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="npcModal{{loop.index}}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -76,7 +76,7 @@
                   {% endfor %}
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary btn-fill" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>

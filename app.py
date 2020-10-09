@@ -190,7 +190,6 @@ def add_npc():
     NPCS = MongoDB.get_npcs()
     attackTypes = MongoDB.get_attack_information()
     debuffTypes = MongoDB.get_turn_debuffs()
-    damageTypes = [x['damage_type_name'] for x in attackTypes]
     default_npc_json = random.choice(NPCS)
     if request.method == 'POST':
         atks = [x.split(" ")[0] for x in request.form.getlist('Attacks')]
@@ -208,13 +207,25 @@ def add_npc():
         default_npc_json["Debuffs"] = debuffs
         default_npc_json["By User"] = user.id
         MongoDB.insert_usermade_npc(default_npc_json)        
-        return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes, damages=damageTypes, debuffs=debuffTypes, added_succesfully=True)
+        return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes, debuffs=debuffTypes, added_succesfully=True)
 
 
-    return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes, damages=damageTypes, debuffs=debuffTypes)
+    return render_template("add_npc.html", default_npc_json=default_npc_json, attacks=attackTypes,debuffs=debuffTypes)
 
+"""
+@app.route('/addAttack', methods=['GET', 'POST'])
+def add_attack():
+    #user, profile = get_user_and_profile()
+    #if not user:
+    #    return redirect(url_for(".login"))
+    
+    attack_types = MongoDB.get_attack_information()
+    default_attack_json = attack_types[1]
+    damage_types = set([x['damage_type_name'] for x in attack_types])
+    
+    return render_template("add_attack.html", default_attack_json=default_attack_json, damages=damage_types)
+"""
 if __name__ == '__main__':
-    os.makedirs(os.path.join(os.getcwd(), "UserAddedNPCs"), exist_ok=True)
     app.run()
     
 

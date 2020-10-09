@@ -13,7 +13,7 @@
     <div class="row">  
       {%for slot in slots%}
         <div class="col-xs-12 col-md-6 col-lg-3">
-          <a class="btn btn-primary" data-toggle="collapse" href="#{{slot['Slot Name']}}" role="button" aria-expanded="false" aria-controls="{{slot['Slot Name']}}" style="margin-left: 1%; margin-top: 1%; width: 100%;">{{  slot['Slot Name'] }}</a>
+          <a class="btn btn-primary btn-fill" data-toggle="collapse" href="#{{slot['Slot Name']}}" role="button" aria-expanded="false" aria-controls="{{slot['Slot Name']}}" style="margin-left: 1%; margin-top: 1%; width: 100%;">{{  slot['Slot Name'] }}</a>
         </div>
       {%endfor%}
     </div>
@@ -40,7 +40,7 @@
                 {% if equipment['unlock_attack_name']%}
                   <td>
                     <p>
-                      <a class="btn btn-secondary" href="{{ url_for('.attacks', attackname=equipment['unlock_attack_name']) }}">Unlocks {{equipment['unlock_attack_name']}}
+                      <a class="btn btn-secondary btn-fill" href="{{ url_for('.attacks', attackname=equipment['unlock_attack_name']) }}">Unlocks {{equipment['unlock_attack_name']}}
                       </a>
                     </p>
                   </td>
@@ -50,7 +50,7 @@
                 {% if equipment['debuff_name']%}
                   <td>
                     <p>
-                      <a class="btn btn-secondary" href="{{ url_for('.attacks', debuffname=equipment['debuff_name']) }}">Unlocks {{equipment['debuff_name']}}
+                      <a class="btn btn-secondary btn-fill" href="{{ url_for('.attacks', debuffname=equipment['debuff_name']) }}">Unlocks {{equipment['debuff_name']}}
                       </a>
                     </p>
                   </td>
@@ -59,7 +59,7 @@
                 {% endif %}
                  <td>
                   {%if equipment['buffs']%}
-                  <button class="btn btn-primary" id="{{equipment['name']|replace(' ', '')|replace('\'', '')}}buff" data-toggle="popover" data-trigger="focus hover" data-html="true" data-placement="left">Buffs</button>
+                  <button class="btn btn-primary btn-fill" id="{{equipment['name']|replace(' ', '')|replace('\'', '')}}buff" data-toggle="popover" data-trigger="focus hover" data-html="true" data-placement="left">Buffs</button>
                   {%else%}
                   <p>{{equipment['name']}} has no buffs</p>
                   {%endif%}

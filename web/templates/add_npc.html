@@ -7,76 +7,79 @@
 {%endblock%}
 
 {%block content%}
-<div class="row">
-    <div class="col">
-        <h3>Add a new NPC</h3>
-        <hr>
-        <form action="" method="POST" class="form" role="form">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label class="control-label" for="">Name</label>
-                    <input class="form-control" id="Name" name="Name" required="" type="text" value="{{ default_npc_json['Name'] }}">
+<div class="panel">
+<div class="panel-heading"><h3>Add a new NPC</h3></div>
+  <div class="panel-body">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <form action="" method="POST" class="form" role="form">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="">Name</label>
+                        <input class="form-control" id="Name" name="Name" required="" type="text" value="{{ default_npc_json['Name'] }}">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                {% for key in default_npc_json["Stats"]%}
-                <div class="form-group col-md-4">
-                    <label class="control-label" for="Stats">{{key}}</label>
-                    <input class="form-control" id="Stats" name="Stats" required="" type="number" value="{{default_npc_json['Stats'][key]}}">
+                <div class="form-row">
+                    {% for key in default_npc_json["Stats"]%}
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="Stats">{{key}}</label>
+                        <input class="form-control" id="Stats" name="Stats" required="" type="number" value="{{default_npc_json['Stats'][key]}}">
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label" for="">Min. Level</label>
-                    <input class="form-control" id="Min Level" name="Min Level" required="" type="text" value="{{ default_npc_json['Min Level'] }}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="">Min. Level</label>
+                        <input class="form-control" id="Min Level" name="Min Level" required="" type="text" value="{{ default_npc_json['Min Level'] }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="">Max. Level</label>
+                        <input class="form-control" id="Max Level" name="Max Level" required="" type="text" value="{{ default_npc_json['Max Level'] }}">
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label" for="">Max. Level</label>
-                    <input class="form-control" id="Max Level" name="Max Level" required="" type="text" value="{{ default_npc_json['Max Level'] }}">
+                <div class="form-row">
+                    <div class="form-group col-md-12 required">
+                        <label class="control-label" for="">NPC's Attacks</label>
+                        <select class="form-control selectpicker" id="Attacks" name="Attacks" required="" type="text" multiple>
+                            {%for attack in attacks%}
+                                <option name="{{attack['name']}}">{{attack['name']}} {{attack['reaction_emoji']}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12 required">
-                    <label class="control-label" for="">NPC's Attacks</label>
-                    <select class="form-control selectpicker" id="Attacks" name="Attacks" required="" type="text" multiple>
-                        {%for attack in attacks%}
-                            <option name="{{attack['name']}}">{{attack['name']}} {{attack['reaction_emoji']}}</option>
-                        {%endfor%}
-                    </select>
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label class="control-label" for="">NPC's Debuff</label>
-                    <select class="form-control selectpicker" id="Debuffs" name="Debuffs" type="text">
-                        <option name="Nothing"> </option>
-                        {%for debuff in debuffs%}
-                            <option name="{{debuff['debuff_stats']['Debuff Type']}}">{{debuff['debuff_stats']['Debuff Type']}}</option>
-                        {%endfor%}
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="">NPC's Debuff</label>
+                        <select class="form-control selectpicker" id="Debuffs" name="Debuffs" type="text">
+                            <option name="Nothing">Nothing</option>
+                            {%for debuff in debuffs%}
+                                <option name="{{debuff['debuff_stats']['Debuff Type']}}">{{debuff['debuff_stats']['Debuff Type']}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label class="control-label" for="">NPC Spawn Type</label>
-                    <select class="form-control selectpicker" id="Spawn Type" name="Spawn Type" required="" type="text">
-                        <option>Common</option>
-                        <option>Rare</option>
-                        <option>Epic</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label" for="">NPC Spawn Type</label>
+                        <select class="form-control selectpicker" id="Spawn Type" name="Spawn Type" required="" type="text">
+                            <option>Common</option>
+                            <option>Rare</option>
+                            <option>Epic</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary">Add NPC</button>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary btn-fill">Add NPC</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+    </div>
     </div>
 </div>
-
 {%endblock%}
 
 {%block script%}

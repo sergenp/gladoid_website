@@ -19,13 +19,13 @@
 	          {%for k in attacks%}
 	          <tr>
 	            <td style="font-size:18px">
-	              <a>{{ k['name'] }}</a>
+	              <p>{{ k['name'] }}</p>
 	            </td>
-	            <td><button class="btn btn-danger dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover">{{ k['damage_type_name'] }}</button></td>
+	            <td><button class="btn btn-danger btn-fill dt{{k['damage_type_name']}}" data-toggle="popover" data-trigger="focus hover">{{ k['damage_type_name'] }}</button></td>
 	            <td style="font-size: 32px;">{{ k['reaction_emoji'] }}</td>
 	            {% if k['buffs']%}
 	             <td>
-	             	<button class="btn btn-primary" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true" data-placement="left">Buffs</button>
+	             	<button class="btn btn-primary btn-fill" id="attack{{k['name']|replace(' ', '')}}" data-toggle="popover" data-trigger="focus hover" data-html="true" data-placement="left">Buffs</button>
 	            </td>
 	            {%else%}
 	            <td><p>This attack has no buffs</p></td>

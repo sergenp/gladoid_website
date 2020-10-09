@@ -1,18 +1,31 @@
 hr {
- border-top:1px solid #6A0DAD;
+ border-top:1px solid antiquewhite;
 }
 
 .btn {
 	text-align: center !important;
 }
 
-body{
-	background-color: rgba(140, 140, 140, 0.25);
-}
 #cover {
     background: url("../img/monkey-1.gif") no-repeat scroll center center #FFF;
     position: absolute;
     height: 100%;
     width: 100%;
     overflow: hidden;
+}
+
+.panel-heading
+{
+    background-image: none;
+    margin-top: 0px;
+    background-color: rgba(150, 150, 150, 0.1) !important;
+    border-color: antiquewhite !important;
+}
+
+ul > li {
+    margin: 0%;
+}
+
+.text {
+    color: #ffffff;
 }
