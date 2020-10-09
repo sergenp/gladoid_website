@@ -29,3 +29,7 @@ ul > li {
 .text {
     color: #ffffff;
 }
+
+.navbar-text {
+    color:#9A9A9A !important;
+}
