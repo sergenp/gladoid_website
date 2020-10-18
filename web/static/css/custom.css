@@ -33,3 +33,20 @@ ul > li {
 .navbar-text {
     color:#9A9A9A !important;
 }
+
+.footer {
+    background-color: rgba(150, 150, 150, 0.1) !important;
+}
+
+#cookieconsent {
+    margin-left:5%;
+}
+
+#gdpr-cookie-accept {
+    color:black;
+}
+
+#gdpr-cookie-advanced {
+    color: black;
+}
+
