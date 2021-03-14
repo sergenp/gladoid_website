@@ -2,7 +2,6 @@ import os
 import random
 import glob
 import flask_discord
-import json
 import re
 try:
     from app_config import configurate 
@@ -15,8 +14,6 @@ from flask_caching import Cache
 from MongoDB.Connector import Connector
 from Discord import DiscordAPI
 import markdown2
-import uuid
-
 
 MongoDB = Connector()
 
