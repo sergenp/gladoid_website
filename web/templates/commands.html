@@ -9,6 +9,28 @@
     width: 100%;
     margin-top: 3%;
   }
+  
+  table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  table tr:nth-child(even){background-color: #444;}
+
+  table tr:hover {background-color: #4d004d;}
+
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: white;
+  }
 </style>
 
 <div class="panel">
@@ -18,186 +40,270 @@
     <p>Simply click <a href="https://discordapp.com/oauth2/authorize?client_id=598077927577616384&permissions=117824&scope=bot">Invite</a> on the menu</p>
   </div>
   <div class="panel-body table-responsive">
-    <h3 id="what-is-this-bot-what-does-it-do-">What is this bot? What does it do?</h3>
-    <p>Gladoid essentially has been created for a private server called &quot;The Hut&quot;. It started as a multi-functional bot
-      that has some utility functionality, like searching videos on youtube based on given sentence or word.
-      It has evolved into a RPG kind-of bot when I started working on a dueling system between players, which basically you challenge a discord member
-      to a duel, game starts, you have certain kind of moves available to you, you react to the message the bot has send to choose
-      from one of the moves and with some calculation happening in the background the other player takes damage.</p>
-    <p>I have recently added a tracking system that tracks the player&#39;s duel statistics.(How many won, how many lost, XP, Coins)
-      With that I have added NPCs to the dueling functionality. You can now, using the exact methods, duel with a computer controlled, player.</p>
-    <p>In future, I am planning to add more NPCs to the game.</p>
-    <h4 id="bot-commands">Bot Commands</h4>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Corona</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>setnewschannel</td>
-          <td>Sets the current channel as the corona news channel. Bot will send news about corona virus to this channel after using this command</td>
-        </tr>
-        <tr>
-          <td>virus</td>
-          <td>Given country, it shows the specific cases inside that country, otherwise it shows general information about the virus. Information about the virus is gotten from the <a href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>General</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>quote</td>
-          <td>Gives out a random quote from a random person from history</td>
-        </tr>
-        <tr>
-          <td>avatar</td>
-          <td>Gives out an embed containing the mentioned user&#39;s avatar h!avatar @sergenp</td>
-        </tr>
-        <tr>
-          <td>invite</td>
-          <td>Gives out the invite link of the bot</td>
-        </tr>
-        <tr>
-          <td>translate</td>
-          <td>Translates given arguments to english</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Gladiator</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>challenge</td>
-          <td>Challenges the another discord member to a gladiator match</td>
-        </tr>
-        <tr>
-          <td>gamead</td>
-          <td>Shows a buzzwordy ad for the Gladiator game</td>
-        </tr>
-        <tr>
-          <td>gamerules</td>
-          <td>Sends a DM containing how the Gladiator game is played</td>
-        </tr>
-        <tr>
-          <td>hunt</td>
-          <td>Spawns a random NPC(%90) or fails(10%). You can fight a Gladiator Game with spawned NPC</td>
-        </tr>
-        <tr>
-          <td>profile</td>
-          <td>Shows your Gladiator Game profile, LVL, XP, Items etc. Or given a tag to another discord Member, shows the same for the discord Member</td>
-        </tr>
-        <tr>
-          <td>shop</td>
-          <td>Given a page, it shows the Items you can buy for your Gladiator. If no argument is given, it shows the available pages instead</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Meme</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>blb</td>
-          <td>Generates a be like bill image given gender value, which can be F or M for Female or Male h!blb [user] [gender=M]</td>
-        </tr>
-        <tr>
-          <td>buzzword</td>
-          <td>Gives out a random company buzzword</td>
-        </tr>
-        <tr>
-          <td>dadjoke</td>
-          <td>Gives out a random dad joke</td>
-        </tr>
-        <tr>
-          <td>meme</td>
-          <td>Gives out a random meme</td>
-        </tr>
-        <tr>
-          <td>swq</td>
-          <td>Gives out a random star wars quote</td>
-        </tr>
-        <tr>
-          <td>xkcd</td>
-          <td>Gives out a random xkcd comic</td>
-        </tr>
-        <tr>
-          <td>yesno</td>
-          <td>Gives out a random yes/no/maybe image Example: h!yesno is my life going to be alright?</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Trivia</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>ask</td>
-          <td>Asks a random trivia question to the user who have used the command</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>No Category</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>changeprefix</td>
-          <td>Changes the prefix of the bot from default &quot;h!&quot;</td>
-        </tr>
-        <tr>
-          <td>help</td>
-          <td>Shows the default help message, h!help command_name for specific information about the command_name</td>
-        </tr>
-      </tbody>
-    </table>
-    <h3 id="gladiator-game">Gladiator Game</h3>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <p><code>h!hunt</code></p>
-        <p>An example of NPC spawning using this command</p>
-        <div class="row">
-          <div class="col-md-offset-3 col-md-6 text-center">
-            <img class="img-fluid" style="width:100%;height:100%;" src="https://raw.githubusercontent.com/sergenp/the_hut_bot/master/Images/Hunt.png" alt="">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-offset-3 col-md-6 text-center">
-            <p>An example fight</p>
-            <img class="img-fluid" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt1.png?raw=true" alt="">
-            <img class="img-fluid" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt2.png?raw=true" alt="">
-            <img class="img-fluid" src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt3.png?raw=true" alt="">
-            <img class="img-fluid"  src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt4.png?raw=true" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <h2 id="gladoid">Gladoid</h2>
+<p>This README contains how to add the bot to your server and what does it do. Feel free to email me if you want to help me develop this bot.</p>
+<h3 id="how-do-i-add-this-bot-to-my-server-">How Do I add this bot to my server?</h3>
+<p>Simply click this following link:</p>
+<p><a href="https://discordapp.com/api/oauth2/authorize?client_id=598077927577616384&amp;permissions=117824&amp;scope=bot">https://discordapp.com/api/oauth2/authorize?client_id=598077927577616384&amp;permissions=117824&amp;scope=bot</a></p>
+<p>to add the bot to your server</p>
+<h3 id="what-is-this-bot-what-does-it-do-">What is this bot? What does it do?</h3>
+<p>Gladoid essentially has been created for a private server called &quot;The Hut&quot;. It started as a multi-functional bot
+that has some utility functionality, like searching videos on youtube based on given sentence or word. 
+It has evolved into a RPG kind-of bot when I started working on a dueling system between players, which basically you challenge a discord member
+to a duel, game starts, you have certain kind of moves available to you, you react to the message the bot has send to choose
+from one of the moves and with some calculation happening in the background the other player takes damage.</p>
+<p>I have recently added a tracking system that tracks the player&#39;s duel statistics.(How many won, how many lost, XP, Coins)
+With that I have added NPCs to the dueling functionality. You can now, using the exact methods, duel with a computer controlled, player.</p>
+<p>In future, I am planning to add more NPCs to the game.</p>
+<h4 id="bot-commands">Bot Commands</h4>
+<p>Brackets indicate aliases, e.g. h!b5test and h!ptest would invoke the same command</p>
+<table>
+<thead>
+<tr>
+<th>Corona</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setnewschannel</td>
+<td>Sets the current channel as the corona news channel. Bot will send news about corona virus to this channel after using this command</td>
+</tr>
+<tr>
+<td>virus</td>
+<td>Given country, it shows the specific cases inside that country, otherwise it shows general information about the virus.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>General</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>quote</td>
+<td>Gives out a random quote from a random person from history</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td>Gives out an embed containing the mentioned user&#39;s avatar h!avatar @sergenp</td>
+</tr>
+<tr>
+<td>invite</td>
+<td>Gives out the invite link of the bot</td>
+</tr>
+<tr>
+<td>translate</td>
+<td>Translates given arguments to english</td>
+</tr>
+<tr>
+<td>invite</td>
+<td>Gives out the Bot&#39;s invite link</td>
+</tr>
+<tr>
+<td>vote</td>
+<td>Gives out a link to vote for my bot</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Gladiator</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>challenge</td>
+<td>Challenges the another discord member to a gladiator match</td>
+</tr>
+<tr>
+<td>gamead</td>
+<td>Shows a buzzwordy ad for the Gladiator game</td>
+</tr>
+<tr>
+<td>gamerules</td>
+<td>Sends a DM containing how the Gladiator game is played</td>
+</tr>
+<tr>
+<td>hunt</td>
+<td>Spawns a random NPC you can fight a Gladiator Game with</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>Shows your Gladiator Game profile, LVL, XP, Items etc. Or given a tag to another discord Member, shows the same for the discord Member</td>
+</tr>
+<tr>
+<td>shop</td>
+<td>Given a page (an integer, e.g. h!shop 1), it shows the Items you can buy for your Gladiator. If no argument is given, it shows the available pages instead</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Meme</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blb</td>
+<td>Generates a be like bill image given gender value, which can be F or M for Female or Male  h!blb [user] [gender=M]</td>
+</tr>
+<tr>
+<td>buzzword</td>
+<td>Gives out a random company buzzword</td>
+</tr>
+<tr>
+<td>dadjoke</td>
+<td>Gives out a random dad joke</td>
+</tr>
+<tr>
+<td>meme</td>
+<td>Gives out a random meme</td>
+</tr>
+<tr>
+<td>swq</td>
+<td>Gives out a random star wars quote</td>
+</tr>
+<tr>
+<td>xkcd</td>
+<td>Gives out a random xkcd comic</td>
+</tr>
+<tr>
+<td>yesno</td>
+<td>Gives out a random yes/no/maybe image  Example:  h!yesno is my life going to be alright?</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Trivia</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ask</td>
+<td>Asks a random trivia question to the user who have used the command</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Interaction</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hug</td>
+<td>Gives out a random hugging gif from Tenor e.g. h!hug @sergenp</td>
+</tr>
+<tr>
+<td>stab</td>
+<td>Gives out a random stabbing gif from Tenor e.g. h!stab @sergenp</td>
+</tr>
+<tr>
+<td>puke</td>
+<td>Gives out a random puking gif from Tenor e.g. h!puke @sergenp</td>
+</tr>
+<tr>
+<td>pat</td>
+<td>Gives out a random patting gif from Tenor e.g. h!pat @sergenp</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Big5Test</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[ b5test, big5test, ptest ]</td>
+<td>Creates a Big5Test for you to solve. Bot will DM you the results you get</td>
+</tr>
+<tr>
+<td>[ b5result, myb5]</td>
+<td>Gets the results of the Big5Test you have solved</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No Category</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>changeprefix</td>
+<td>Changes the prefix of the bot from default &quot;h!&quot;</td>
+</tr>
+<tr>
+<td>help</td>
+<td>Shows the default help message, h!help command_name for specific information about the command_name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gladiator-game">Gladiator Game</h3>
+<p><code>h!hunt</code></p>
+<p>An example of NPC spawning using this command</p>
+<p><img src="https://raw.githubusercontent.com/sergenp/the_hut_bot/master/Images/Hunt.png" alt=""></p>
+<p>An example fight</p>
+<p><img src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt1.png?raw=true" alt=""></p>
+<p><img src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt2.png?raw=true" alt=""></p>
+<p><img src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt3.png?raw=true" alt=""></p>
+<p><img src="https://github.com/sergenp/the_hut_bot/blob/master/Images/Hunt4.png?raw=true" alt=""></p>
+<h3 id="development">Development</h3>
+<p>Before launching the bot, make sure the environmental variables are set correctly. You need 3 variables. I suggest creating a <code>bot_token.py</code> where the bot.py is at, and define a configurate method like so:</p>
+<pre><code class="lang-py">import <span class="hljs-keyword">os</span>
+
+def configurate():
+    <span class="hljs-keyword">os</span>.environ[<span class="hljs-string">"BOT_TOKEN"</span>] = <span class="hljs-string">""</span> <span class="hljs-comment"># Your discord bot token here</span>
+    <span class="hljs-keyword">os</span>.environ[<span class="hljs-string">"MongoDB_CONNECTION_STRING"</span>] = <span class="hljs-string">""</span> <span class="hljs-comment"># your mongodb connection string, </span>
+    <span class="hljs-comment">#required for downloading the Gladiator game information (or uploading), </span>
+    <span class="hljs-comment"># Keeping track of the Profiles and Game messages.</span>
+    <span class="hljs-comment"># the bad thing about it is that it doesn't save/upload the NPCs, Events, Attack Informations, Settings</span>
+    <span class="hljs-comment"># (I guess I was too lazy, I just uploaded the json files directly into specific collections)</span>
+    <span class="hljs-keyword">os</span>.environ[<span class="hljs-string">"TENOR_API_KEY"</span>] = <span class="hljs-string">""</span> <span class="hljs-comment"># can be nothing, tenor doesn't seem to care about the API key, </span>
+    <span class="hljs-comment"># but must be in the environ to make bot work properly.</span>
+</code></pre>
+<p>if this file is created and configurated like so, there should be only one problem you would need to fix.</p>
+<h4 id="mongodb-downloading-problem">MongoDB Downloading Problem</h4>
+<p>When the bot is first launched, it tries to download all the collections inside MongoDB to their respective folders. This is to make sure everything is updated according to database. If you don&#39;t have the NPCs, Events, Attack Informations, Equipments, Settings collections, this will just throw some errors. In order to launch the bot first time, I suggest removing line 16 from bot.py which reads <code>MongoDatabase.download_gladiator_files_to_local()</code>.</p>
+<p>Bad thing about removing the line is you won&#39;t be in sync with your cloud/local mongodb database if you lose the json files inside Gladiator folder. </p>
+<h5 id="why-">Why ?</h5>
+<p>Why did I made it work like this, Why didn&#39;t I just connected to the MongoDB database, get what I needed from it realtime?</p>
+<p>To be honest, that also would work. But at the beginning of my coding, I wasn&#39;t using MondoDB, just was some json files for persistent data, like the collections I have stated above. Later on I added Profiles and Guild specific settings, so to save them to a database made the most sense. With that I also added those said collections to the database. Maybe in the future I will overhaul the system. But I kinda like the I/O system rather than connecting to a cloud database and fetching data from it. It is faster and works better for heroku. If you don&#39;t serve it on heroku or you&#39;re using a local MongoDB server in it, I would suggest converting e.g. :</p>
+<pre><code class="lang-py"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_equipment</span><span class="hljs-params">(<span class="hljs-keyword">self</span>, <span class="hljs-symbol">equipment_name:</span> str = <span class="hljs-string">""</span>)</span></span> -&gt; dict <span class="hljs-keyword">or</span> <span class="hljs-symbol">None:</span>
+    <span class="hljs-keyword">for</span> equipment <span class="hljs-keyword">in</span> <span class="hljs-keyword">self</span>.<span class="hljs-symbol">equipments:</span>
+        <span class="hljs-keyword">if</span> equipment[<span class="hljs-string">"name"</span>] == <span class="hljs-symbol">equipment_name:</span>
+            <span class="hljs-keyword">return</span> equipment
+    <span class="hljs-keyword">return</span> None
+</code></pre>
+<p>to</p>
+<pre><code class="lang-py"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_equipment</span></span>(<span class="hljs-keyword">self</span>, <span class="hljs-symbol">equipment_name:</span> str=<span class="hljs-string">""</span>) -&gt; dict <span class="hljs-keyword">or</span> <span class="hljs-symbol">None:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>.connector.DatabaseName.Equipments.find_one({<span class="hljs-string">"name"</span> : equipment_name})
+</code></pre>
+<p>this isn&#39;t necessary of course.</p>
+<h4 id="now-what-">Now what?</h4>
+<p>I assume you have created your bot_token.py and deleted the 16th line from bot.py. Now, all you need to do is install the requirements. 
+<code>pip install -r requirements.txt</code></p>
+<p>Then run the bot:
+<code>python bot.py</code></p>
+<p>You now have access to every functionality bot offers. Bot should update your profile based on your Discord user id in your MongoDB database. Be sure to check it out after you have done something that updates your profile. MongoDB.Connector.Connector will create a new database called &quot;HutAssistant&quot; in your MongoDB, so there will be no conflict with other collections you have.</p>
+
 
 {%endblock%}
